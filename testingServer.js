@@ -30,6 +30,23 @@ app.put('/api/fetch-sum', async (req, res) => {
     } // <-- Fixed: Added missing closing brace for try block
 }); // <-- Fixed: Added missing closing brace for route handler
 
+app.put('/api/fetch', async (req, res) => {
+    const { hi } = req.body;
+    
+    try {
+        // Convert strings to numbers to prevent string concatenation (e.g., "5" + "5" = "55")
+        if (isNaN(hi)) {
+            return res.status(400).json({ success: false, message: 'Please provide valid numbers.' });
+        }
+
+        return res.json({ success: true, message: 'Calculation successful!', note: 'welcome to the world of javascript' });
+        
+    } catch (err) {
+        console.error('Format error:', err.message);
+        return res.status(500).json({ success: false, message: 'Internal server error.' });
+    } // <-- Fixed: Added missing closing brace for try block
+}); // <-- Fixed: Added missing closing brace for route handler
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

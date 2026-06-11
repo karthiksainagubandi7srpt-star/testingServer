@@ -30,7 +30,7 @@ app.put('/api/fetch-sum', async (req, res) => {
     } // <-- Fixed: Added missing closing brace for try block
 }); // <-- Fixed: Added missing closing brace for route handler
 
-app.put('/api/fetch', async (req, res) => {
+app.put('/api/fetch-message', async (req, res) => {
     const { hi } = req.body;
     
     try {
@@ -38,8 +38,8 @@ app.put('/api/fetch', async (req, res) => {
         if (isNaN(hi)) {
             return res.status(400).json({ success: false, message: 'Please provide valid numbers.' });
         }
-
-        return res.json({ success: true, message: 'Calculation successful!', note: 'welcome to the world of javascript' });
+        const greeting = `Hello, ${name}! Welcome back.`; 
+        return res.json({ success: true, message: 'Calculation successful!', note: greeting });
         
     } catch (err) {
         console.error('Format error:', err.message);
